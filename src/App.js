@@ -1,25 +1,66 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
 
-function App() {
+const App = () => {
+  const [ messages, setMessages ] = useState([
+    {
+      message: 'message',
+      username: 'user1',
+      time: new Date(),
+      id: '1'
+    },
+    {
+      message: 'message2',
+      username: 'user2',
+      time: new Date(),
+      id: '2'
+    },
+    {
+      message: 'message3',
+      username: 'user3',
+      time: new Date(),
+      id: '3'
+    },
+  ])
+  const [ newMessage, setNewMessage ] = useState(
+    ''
+  )
+
+  const handleMessageChange = (event) => {
+    setNewMessage(event.target.value)
+  }
+
+  const handleNewMessage = (event) => {
+    event.preventDefault()
+    console.log('sending message')
+
+    const message = {
+      message: newMessage,
+      username: 'testuser',
+      time: new Date(),
+      id: messages.length + 1
+    }
+
+    setMessages(messages.concat(message))
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+    <h2>messages</h2>
+    {messages.map(message => 
+      <div key={message.id}>
+        <p>{message.message}</p>
+        {message.username} {message.time.toString()}
+      </div>
+    )}
+    <form onSubmit={handleNewMessage}>
+      Message:&nbsp;
+      <input value={newMessage} onChange={handleMessageChange}/>&nbsp;
+      <button type="submit">Send</button>
+    </form>
+
+
+    </>
+  )  
 }
 
 export default App;
