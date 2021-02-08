@@ -21,9 +21,9 @@ const MessageForm = ({ user, createMessage }) => {
       }
 
     return (
-        <form onSubmit={handleNewMessage}>
+        <form onSubmit={handleNewMessage} style={{ borderRadius: '12px' }}>
         Message:&nbsp;
-        <input value={newMessage} onChange={handleMessageChange}/>&nbsp;
+        <input value={newMessage} onChange={handleMessageChange} style={{ width: '75%'}}/>&nbsp;
         <button type="submit">Send</button>
       </form>
     )
